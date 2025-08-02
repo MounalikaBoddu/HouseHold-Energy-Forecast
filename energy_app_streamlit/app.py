@@ -7,6 +7,7 @@ import joblib
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
+import os
 
 # Page config
 st.set_page_config(page_title="Household Energy Forecast", layout="wide")
@@ -15,7 +16,17 @@ st.title("🔋 Household Energy Consumption Forecasting App")
 
 # Load data
 st.subheader("📊 Raw Data")
-df = pd.read_csv("household_energy.csv", parse_dates=['timestamp'])
+#df = pd.read_csv("household_energy.csv", parse_dates=['timestamp'])
+#df = pd.read_csv("household_energy.csv", parse_dates=['timestamp'])
+
+#df = pd.read_csv(os.path.join(os.path.dirname(__file__), "household_energy.csv"), parse_dates=['timestamp'])
+
+
+# This will always work regardless of where the app is run from
+csv_path = os.path.join(os.path.dirname(__file__), "household_energy.csv")
+df = pd.read_csv(csv_path, parse_dates=['timestamp'])
+
+
 st.write(df.head())
 
 # Feature Engineering
